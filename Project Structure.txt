@@ -1,0 +1,22 @@
+ai-chatbot-mentor/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── prompts/
+│   ├── python_prompt.txt
+│   ├── sql_prompt.txt
+│   └── ml_prompt.txt
+│
+├── models/
+│   └── router.py
+│
+├── memory/
+│   └── chat_memory.py
+│
+├── utils/
+│   ├── export_chat.py
+│   └── token_manager.py
+│
+└── assets/
