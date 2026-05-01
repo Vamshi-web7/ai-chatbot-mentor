@@ -1,0 +1,5 @@
+def trim_text(text, limit=512):
+
+    words = text.split()
+
+    return " ".join(words[:limit])
