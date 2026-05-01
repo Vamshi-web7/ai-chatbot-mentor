@@ -1,0 +1,6 @@
+def select_model(module):
+
+    if module in ["Machine Learning", "Deep Learning"]:
+        return "gemini"
+
+    return "huggingface"
