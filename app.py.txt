@@ -1,0 +1,57 @@
+import streamlit as st
+from langchain.memory import ConversationBufferMemory
+from langchain.chains import ConversationChain
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+st.set_page_config(page_title="AI Chatbot Mentor")
+
+st.title("AI Chatbot Mentor")
+
+modules = [
+    "Python",
+    "SQL",
+    "Data Analytics",
+    "Machine Learning",
+    "Deep Learning",
+    "Statistics",
+    "Power BI",
+    "Interview Preparation"
+]
+
+selected_module = st.selectbox("Choose Learning Module", modules)
+
+system_prompts = {
+    "Python": "You are a Python mentor. Answer only Python-related questions.",
+    "SQL": "You are an SQL mentor. Answer only SQL-related questions.",
+    "Data Analytics": "You are a Data Analytics mentor.",
+    "Machine Learning": "You are an ML mentor.",
+    "Deep Learning": "You are a Deep Learning mentor.",
+    "Statistics": "You are a Statistics mentor.",
+    "Power BI": "You are a Power BI mentor.",
+    "Interview Preparation": "You are an interview preparation mentor."
+}
+
+memory = ConversationBufferMemory()
+
+llm = ChatGoogleGenerativeAI(
+    model="gemini-pro",
+    temperature=0.3,
+    google_api_key="YOUR_API_KEY"
+)
+
+conversation = ConversationChain(
+    llm=llm,
+    memory=memory
+)
+
+user_input = st.text_input("Ask your question")
+
+if st.button("Submit"):
+    prompt = f"""
+    {system_prompts[selected_module]}
+
+    User Question:
+    {user_input}
+    """
+
+    response = conversation.predict(input=prompt)
